@@ -1,0 +1,33 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div fxLayout="column">
+  <mat-toolbar color="primary">
+    <a mat-button (click)="sidenav.toggle()"><span class="fa fa-bars"></span></a>
+    <h1>DASHBOARD</h1>
+    <a mat-button>慢跑</a>
+    <a mat-button>游泳</a>
+    <a mat-button>射箭</a>
+    <span class="flex-spacer"></span>
+    <a mat-button>登入</a>
+    <a mat-button>註冊</a>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container"> 
+
+    <mat-sidenav #sidenav mode="side" class="sidenav-left" opened>
+      <mat-toolbar class="mat-theme-indigo">
+        <h1 class="mat-toolbar-tools">Segments</h1>
+      </mat-toolbar>
+      <a mat-button>慢跑</a>
+      <a mat-button>游泳</a>
+      <a mat-button>射箭</a>
+    </mat-sidenav>
+
+    <div class="main">
+      
+      <app-index></app-index>
+      <!--<router-outlet></router-outlet>-->
+      
+    </div>
+  </mat-sidenav-container>
+  
+</div>

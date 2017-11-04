@@ -21,10 +21,31 @@ export interface Margin {
     left2: number;
 }
 
-interface Stock2 {
+export interface Stock2 {
   date: Date;
   price: number;
 }
+
+export interface IGridsterOptions {
+    direction?: string;
+    lanes?: number;
+    widthHeightRatio?: number;
+    heightToFontSizeRatio?: number;
+    dragAndDrop?: boolean;
+    itemSelector?: string;
+    resizable?: boolean;
+    shrink?: boolean;
+    floating?: boolean;
+    responsiveView?: boolean;
+    responsiveDebounce?: number;
+    breakpoint?: string;
+    minWidth?: number;
+    useCSSTransforms?: boolean;
+    cellHeight?: number;
+    cellWidth?: number;
+    responsiveOptions?: Array<IGridsterOptions>;
+}
+
 
 @Component({
   selector: 'app-index',
@@ -33,39 +54,50 @@ interface Stock2 {
 })
 export class IndexComponent implements OnInit {
 
-    gridsterOptions:any = {
+    gridsterOptions: IGridsterOptions = {
         lanes: 2,
-
         direction: 'vertical',
-
-        dragAndDrop: true
+        floating: true,
+        dragAndDrop: true,
+        resizable: true,
+        widthHeightRatio: 1,
+        shrink: true,
+        useCSSTransforms: true,
+        responsiveView: true,
+        responsiveDebounce: 500,
+        responsiveOptions: [
+            {
+                breakpoint: 'sm',
+                // minWidth: 480,
+                lanes: 3
+            },
+            {
+                breakpoint: 'md',
+                minWidth: 768,
+                lanes: 4
+            },
+            {
+                breakpoint: 'lg',
+                minWidth: 1250,
+                lanes: 6
+            },
+            {
+                breakpoint: 'xl',
+                minWidth: 1800,
+                lanes: 8
+            }
+        ]
     };
+
     title:string = 'Angular2Gridster';
-    widgets:any = [
+    widgets: Array<any> = [
         {
-            x: 0, y: 0, w: 2, h: 2,
+            x: 2, y: 2, w: 2, h: 2,
+            dragAndDrop: true,
+            resizable: true,
             title: 'Basic form inputs 1',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            class: 'svg1'
+            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
         },
-        {
-            x: 1, y: 0, w: 2, h: 2,
-            title: 'Basic form inputs 2',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            class: 'svg2'
-        },
-        {
-            x: 1, y: 1, w: 2, h: 2,
-            title: 'Basic form inputs 3',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            class: 'svg3'
-        },
-        {
-            x: 3, y: 0, w: 2, h: 2,
-            title: 'Basic form inputs 4',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            class: 'svg4'
-        }
     ];
 
     removeLine(gridster) {
@@ -96,6 +128,22 @@ export class IndexComponent implements OnInit {
         widget.h = size;
 
         return false;
+    }
+
+    addWidgetSpeedData() {
+        console.log('add');
+        this.widgets.push({
+            title: 'Speed Data',
+            dragAndDrop: true,
+            resizable: true,
+            content: 'some statistics here'
+        });
+    }
+
+    remove($event, index: number, gridster) {
+        $event.preventDefault();
+        this.widgets.splice(index, 1);
+        console.log('widget remove', index);
     }
 
   title1: string = '每日慢跑公里數';

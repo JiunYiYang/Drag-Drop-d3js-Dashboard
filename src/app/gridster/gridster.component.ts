@@ -10,7 +10,7 @@ export class GridsterComponent implements OnInit {
   
   gridsterOptions:any = {
         lanes: 5,
-
+        
         direction: 'vertical',
 
         dragAndDrop: true

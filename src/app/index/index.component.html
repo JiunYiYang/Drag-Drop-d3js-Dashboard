@@ -20,18 +20,42 @@
 </gridster>-->
 
 <!--<div fxFlex="1 1 50%">-->
+調整間距大小:
+<button (click)="addLine(gridster)">-</button>
+　
+<button (click)="removeLine(gridster)">+</button>
+
+<button (click)="addWidgetSpeedData()">
+    Add Speed Stat.
+</button>
+<br><br>
 <gridster [options]="gridsterOptions" #gridster>
-    <gridster-item >
+
+    <gridster-item>
         <!--<h2>{{title1}}</h2>
         <svg class="svg1" width="700" height="500"></svg>-->
         <h2>{{title2}}</h2>
         <p>jlwejwijdijdiedjiwqjdwidjiljldj</p>
         <svg class="svg2" width="700" height="500"></svg>
+        
     </gridster-item>
     <gridster-item >
         <h2>{{title1}}</h2>
         <p>jdjdailjciaailedjlijiajfisejf</p>
         <svg class="svg1" width="700" height="500"></svg>
+        
+    </gridster-item>
+    <gridster-item *ngFor="let widget of widgets; let indx = index" #itemComp
+                    (change)="itemChange($event, gridster)" >
+        <div class="panel-heading">
+            <h5 class="panel-title">{{ widget.title }}</h5>
+        </div>
+        <div class="panel-body">
+            <svg class="svg1" width="700" height="500"></svg>
+            <p>
+                <button (click)="remove($event, indx, gridster)">remove</button>
+            </p>
+        </div>
     </gridster-item>
 </gridster>
 <!--</div>
